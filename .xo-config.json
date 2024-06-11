@@ -1,0 +1,9 @@
+{
+  "prettier": true,
+  "envs": ["node"],
+  "rules": {
+    "import/extensions": "off",
+    "new-cap": "off",
+    "unicorn/prefer-top-level-await": "off"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "incremental": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "pretty": true,
+    "stripInternal": true,
+    "noEmitOnError": true,
+    "sourceMap": true
+  },
+  "include": ["src"]
+}

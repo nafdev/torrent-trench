@@ -1,0 +1,6 @@
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "samverschueren.linter-xo"
+  },
+  "cSpell.words": ["QBIT", "Qbittorrent", "reannounce"]
+}
