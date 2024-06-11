@@ -33,7 +33,7 @@ This project works on a concept of `trenches` which consist of any number of `fi
 
 ### Configuration JSON
 
-```json
+```jsonc
 // torrent-trench.json
 {
   // Array of torrent client connections
@@ -55,7 +55,7 @@ This project works on a concept of `trenches` which consist of any number of `fi
 
 ### Trench Definition Schema
 
-```json
+```jsonc
 {
   "type": "filter" | "action" | "fork",
   "fork": string, // Name of another trench to run
@@ -87,7 +87,7 @@ This project works on a concept of `trenches` which consist of any number of `fi
 
 ### Numeric Conditions
 
-```json
+```jsonc
 {
   // For numeric filters (progress, ratio, seedTime, timeActive)
   "lte": number,
@@ -97,7 +97,7 @@ This project works on a concept of `trenches` which consist of any number of `fi
 
 ### String Conditions
 
-```json
+```jsonc
 {
   // For string filters (tracker, label, savePath, name)
   "caseInsensitive": boolean, // if true, all comparisons are case insensitive (default false)
@@ -115,7 +115,7 @@ This project works on a concept of `trenches` which consist of any number of `fi
 
 #### deleteTorrent
 
-```json
+```jsonc
 {
   "deleteFiles": boolean // default false
 }
