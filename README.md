@@ -31,97 +31,7 @@ services:
 
 This project works on a concept of `trenches` which consist of any number of `filters`, `actions`, or `forks` (which are other trenches), all defined under one configuration JSON.
 
-### Configuration JSON
-
-```jsonc
-// torrent-trench.json
-{
-  // Array of torrent client connections
-  "connections": {
-    "client": "qbit",
-    "url": string,
-    "username": string,
-    "password": string
-  }[],
-  // Array of trench definitions
-  "trenches": {
-    "name": string,
-    "enabled": boolean, // Enables trench schedule (doesn't affect forks)
-    "schedule": "*/30 * * * *", // Cron expression, defaults to every 30th second,
-    "trench": Trench[] // See trench definition schema
-  } []
-}
-```
-
-### Trench Definition Schema
-
-```jsonc
-{
-  "type": "filter" | "action" | "fork",
-  "fork": string, // Name of another trench to run
-  "filter": "tracker" | // string conditions
-            "progress" | // numeric, out of 100
-            "ratio" | // numeric
-            "label" | // string
-            "savePath" | // string
-            "name" | // string
-            "complete" | // boolean
-            "seedTime" | // numeric, in seconds
-            "timeActive", // numeric, in seconds
-  // Filter conditions
-  "condition": NumericConditions | StringConditions | boolean,
-
-  "action": "resumeTorrent" |
-            "pauseTorrent" |
-            "recheckTorrent" |
-            "reannounceTorrent" |
-            "increasePriority" |
-            "decreasePriority" |
-            "maximisePriority" |
-            "minimisePriority",
-  "options": {
-    // Options for actions
-  }
-}
-```
-
-### Numeric Conditions
-
-```jsonc
-{
-  // For numeric filters (progress, ratio, seedTime, timeActive)
-  "lte": number,
-  "gte": number
-}
-```
-
-### String Conditions
-
-```jsonc
-{
-  // For string filters (tracker, label, savePath, name)
-  "caseInsensitive": boolean, // if true, all comparisons are case insensitive (default false)
-  "includes": string,
-  "notIncludes": string,
-  "startsWith": string,
-  "notStartsWith": string,
-  "endsWith": string,
-  "notEndsWith": string,
-  "match": Regex string
-}
-```
-
-### Trench Action Options
-
-#### deleteTorrent
-
-```jsonc
-{
-  "deleteFiles": boolean // default false
-}
-```
-
-## Example configuration
+### Example configuration
 
 This is a configuration with 1 trench, which runs every hour, and will remove any torrent (without deleting files) once it reaches a seed time of 1 day.
 
@@ -161,5 +71,96 @@ This is a configuration with 1 trench, which runs every hour, and will remove an
       ]
     }
   ]
+}
+```
+
+### Configuration Schema
+
+```json
+// torrent-trench.json
+{
+  // Array of torrent client connections
+  "connections": {
+    "client": "qbit",
+    "url": string,
+    "username": string,
+    "password": string
+  }[],
+  // Array of trench definitions
+  "trenches": {
+    "name": string,
+    "enabled": boolean, // Enables trench schedule (doesn't affect forks)
+    "schedule": "*/30 * * * *", // Cron expression, defaults to every 30th second,
+    "trench": Trench[] // See trench definition schema
+  } []
+}
+```
+
+### Trench Definition Schema
+
+```json
+{
+  "type": "filter" | "action" | "fork",
+  "fork": string, // Name of another trench to run
+  "filter": "tracker" | // string conditions
+            "progress" | // numeric, out of 100
+            "ratio" | // numeric
+            "label" | // string
+            "savePath" | // string
+            "name" | // string
+            "complete" | // boolean
+            "seedTime" | // numeric, in seconds
+            "timeActive", // numeric, in seconds
+  // Filter conditions
+  "condition": NumericConditions | StringConditions | boolean,
+
+  "action": "resume" |
+            "pause" |
+            "delete" |
+            "recheck" |
+            "reannounce" |
+            "increasePriority" |
+            "decreasePriority" |
+            "maximisePriority" |
+            "minimisePriority",
+  "options": {
+    // Options for actions
+  }
+}
+```
+
+### Numeric Conditions
+
+```json
+{
+  // For numeric filters (progress, ratio, seedTime, timeActive)
+  "lte": number,
+  "gte": number
+}
+```
+
+### String Conditions
+
+```json
+{
+  // For string filters (tracker, label, savePath, name)
+  "caseInsensitive": boolean, // if true, all comparisons are case insensitive (default false)
+  "includes": string,
+  "notIncludes": string,
+  "startsWith": string,
+  "notStartsWith": string,
+  "endsWith": string,
+  "notEndsWith": string,
+  "match": Regex string
+}
+```
+
+### Trench Action Options
+
+#### deleteTorrent
+
+```json
+{
+  "deleteFiles": boolean // default false
 }
 ```
