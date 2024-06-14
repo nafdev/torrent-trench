@@ -35,7 +35,7 @@ This project works on a concept of `trenches` which consist of any number of `fi
 
 This is a configuration with 1 trench, which runs every hour, and will remove any torrent (without deleting files) once it reaches a seed time of 1 day.
 
-```json
+```jsonc
 {
   "version": 1,
   "connections": [
@@ -43,8 +43,8 @@ This is a configuration with 1 trench, which runs every hour, and will remove an
       "client": "qbit",
       "url": "http://192.168.1.123:10096",
       "username": "admin",
-      "password": "adminadmin"
-    }
+      "password": "adminadmin",
+    },
   ],
   "trenches": [
     {
@@ -55,28 +55,28 @@ This is a configuration with 1 trench, which runs every hour, and will remove an
         {
           "type": "filter",
           "filter": "complete",
-          "condition": true
+          "condition": true,
         },
         {
           "type": "filter",
           "filter": "seedTime",
           "condition": {
-            "gte": 86400
-          }
+            "gte": 86400,
+          },
         },
         {
           "type": "action",
-          "action": "delete"
-        }
-      ]
-    }
-  ]
+          "action": "delete",
+        },
+      ],
+    },
+  ],
 }
 ```
 
 ### Configuration Schema
 
-```json
+```jsonc
 // torrent-trench.json
 {
   // Array of torrent client connections
@@ -98,7 +98,7 @@ This is a configuration with 1 trench, which runs every hour, and will remove an
 
 ### Trench Definition Schema
 
-```json
+```jsonc
 {
   "type": "filter" | "action" | "fork",
   "fork": string, // Name of another trench to run
@@ -131,7 +131,7 @@ This is a configuration with 1 trench, which runs every hour, and will remove an
 
 ### Numeric Conditions
 
-```json
+```jsonc
 {
   // For numeric filters (progress, ratio, seedTime, timeActive)
   "lte": number,
@@ -141,7 +141,7 @@ This is a configuration with 1 trench, which runs every hour, and will remove an
 
 ### String Conditions
 
-```json
+```jsonc
 {
   // For string filters (tracker, label, savePath, name)
   "caseInsensitive": boolean, // if true, all comparisons are case insensitive (default false)
@@ -159,7 +159,7 @@ This is a configuration with 1 trench, which runs every hour, and will remove an
 
 #### deleteTorrent
 
-```json
+```jsonc
 {
   "deleteFiles": boolean // default false
 }
