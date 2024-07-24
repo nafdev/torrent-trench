@@ -25,11 +25,9 @@ const stringConditions = z
 			.transform((argument) => new RegExp(argument)),
 	})
 	.partial()
-	.refine(
-		({ startsWith, includes, endsWith, match }) =>
-			startsWith !== undefined || includes !== undefined || endsWith !== undefined || match !== undefined,
-		{ message: 'At least one string condition must be provided' },
-	);
+	.refine((conditions) => Object.entries(conditions).some((condition) => condition[0] !== 'caseInsensitive'), {
+		message: 'At least one string condition must be provided',
+	});
 
 export type StringConditionsFilter = z.infer<typeof stringConditions>;
 
